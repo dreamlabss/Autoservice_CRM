@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello Manager{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    body{justify-content: center; display: flex; }
+    input{ width: 90%; padding: 5px 15px; margin: 5px 0; border: 1px solid teal;}
+    .myBtn{ padding: 5px 15px; color: teal; font-size:14px; background: transparent; border: 1px solid teal; cursor: pointer;}
+    .myHrf{ text-decoration: none; padding: 12px; margin-left:650px; color: #0095b6; width:50px; font-size:14px; background: transparent;
+        border: 1px solid #0095b6; justify-content: space-around;  border-radius: 5px; cursor: pointer;}
+    .mDiv{ width:750px;  border: 1px solid teal; padding:15px; margin:0; box-sizing:border-box;}
+    .mylist{ display: flex; padding:15px; border: 2px solid teal; margin-top:15px; justify-content: space-between; align-items:center;}
+</style>
+
+
+<div class="mDiv">
+    <a class="myHrf" href="/logout">Выйти</a>
+    <h1> Зарегестрировать клиента на ремонт</h1>
+
+    {{ form_start(consignmentForm, {'attr':{'id':'myForm'}})}}
+    <label>Модель</label>{{ form_row(consignmentForm.model, {'value':''}) }}
+    <label>Бренд</label>{{ form_row(consignmentForm.brand, {'value':''}) }}
+    <label>Год выпуска</label>{{ form_row(consignmentForm.releaseDate, {'value':''}) }}
+    <label>VIN</label>{{ form_row(consignmentForm.vin, {'value':''}) }}
+    <label>Фамилия</label>{{ form_row(consignmentForm.surname, {'value':''}) }}
+    <label>Имя</label>{{ form_row(consignmentForm.name, {'value':''}) }}
+    <label>Отчество</label>{{ form_row(consignmentForm.midName, {'value':''}) }}
+    <label>Телефон</label>{{ form_row(consignmentForm.phone, {'value':''}) }}
+    <label>Автосервис</label>{{ form_row(consignmentForm.service, {'value':''}) }}
+    <label>Адрес автосервиса</label>{{ form_row(consignmentForm.address, {'value':''}) }}
+    <label>Дата записи на ремонт</label>{{ form_row(consignmentForm.date, {'value':''}) }}
+
+        <button type="submit" class="myBtn" >Register</button>
+
+        {% if message %}
+        <h3 style="color:green">Регистрация прошла успешно</h3>
+        {% endif %}
+    {{ form_end(consignmentForm) }}
+
+
+    <h1>Готовые к оплате накладные</h1>
+    {% for b in basket %}
+        <p class="mylist">
+            <span><b>Модель: </b>{{ b.consignment.vehicle.model }}</span>
+            <span><b>VIN:</b> {{ b.consignment.vehicle.vin }}</span>
+            <span><b>Стоимость ремонта:</b> {{ b.cost }}</span>
+            <a href="manager/{{ b.id }}/pdf">Скачать пдф</a>
+        </p>
+    {% endfor %}
+</div>
+{% endblock %}

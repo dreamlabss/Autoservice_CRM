@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello Add action !{% endblock %}
+
+{% block body %}
+    <style>
+        body{justify-content: center; display: flex; }
+        input{ width: 90%; padding: 5px 15px; margin: 5px 0; border: 1px solid teal;}
+        .myBtn{ padding: 5px 15px; color: teal; font-size:14px; background: transparent; border: 1px solid teal; cursor: pointer;}
+        .myHrf{ text-decoration: none; padding: 12px; margin-left:650px; margin-right:0px; color: #0095b6; width:50px; font-size:14px; background: transparent;
+            border: 1px solid #0095b6; justify-content: space-around;  border-radius: 5px; cursor: pointer;}
+        .mDiv{ width:750px;  border: 1px solid teal; padding:15px; margin:0; box-sizing:border-box;}
+        .mylist{ display: flex; padding:15px; border: 2px solid teal; margin-top:15px; justify-content: space-between; align-items:center;}
+    </style>
+
+    <div class="mDiv">
+        <a class="myHrf" href="/logout">Выйти</a>
+        <span style="margin-right: 10px"><b>Модель: </b>{{ vehicle.model }}</span>
+        <span style="margin-right: 10px"><b>VIN: </b>{{ vehicle.vin}}</span>
+        <span style="margin-right: 10px"><b>Бренд: </b>{{ vehicle.brand.name }}</span>
+        <hr>
+        <p>
+            {{ form_start(addDetailForm)}}
+                <label>Деталь</label>{{ form_row(addDetailForm.detail) }}
+                <label>Цена</label>{{ form_row(addDetailForm.cost) }}
+                <button class="myBtn" type="submit" >Добавить деталь</button>
+            {{ form_end(addDetailForm) }}
+        </p>
+        <p>
+            {{ form_start(addServiceForm)}}
+                <label>Услуга</label>{{ form_row(addServiceForm.service) }}
+                <label>Цена</label>{{ form_row(addServiceForm.cost) }}
+                <button  class="myBtn" type="submit" >Добавить услугу</button>
+            {{ form_end(addServiceForm) }}
+        </p>
+
+    <h2>Добавленые детали</h2>
+
+   {% for d in details %}
+       <p>{{ d.detail.name }} {{ d.detail.cost }} рублей</p>
+       <hr>
+   {% endfor %}
+
+    <h2>Добавленые услуги</h2>
+
+    {% for s in services %}
+        <p>{{ s.job.name }} {{ s.job.cost }} рублей</p>
+        <hr>
+    {% endfor %}
+    </div>
+{% endblock %}

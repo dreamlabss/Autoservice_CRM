@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Войти{% endblock %}
+
+{% block body %}
+    <style>
+        body{justify-content: center; display: flex; }
+       input{ width: 90%; padding: 5px 15px; margin: 5px 0; border: 1px solid teal;}
+       .myBtn{ padding: 5px 15px; color: teal; font-size:14px; background: transparent; border: 1px solid teal; cursor: pointer;}
+       .myHrf{ padding: 5px 15px; color: teal; font-size:14px; background: transparent; border: 1px solid teal; cursor: pointer;}
+       .mDiv{ width:750px;  border: 1px solid teal; padding:15px;
+           margin:0;
+           box-sizing:border-box;}
+    </style>
+    <div class="mDiv">
+<form method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+
+    <h1 class="h3 mb-3 font-weight-normal">Авторизация</h1>
+    <label for="inputLogin">Логин</label><br>
+    <input type="text" value="{{ last_username }}" name="login" id="inputLogin" class="form-control" autocomplete="username" required autofocus>
+     <p><label for="inputPassword">Пароль</label><br>
+    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required></p>
+
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    >
+
+    {#
+        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+        See https://symfony.com/doc/current/security/remember_me.html
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" name="_remember_me"> Remember me
+            </label>
+        </div>
+    #}
+
+    <button class="myBtn" type="submit">
+        Войти
+    </button>
+    <a class="myHrf" href="/register">Регистрация</a>
+</form>
+    </div>
+{% endblock %}

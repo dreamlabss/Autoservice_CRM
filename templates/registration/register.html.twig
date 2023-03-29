@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block body %}
+    <style>
+        body{justify-content: center; display: flex; }
+        input{ width: 90%; padding: 5px 15px; margin: 5px 0; border: 1px solid teal;}
+        .myBtn{ padding: 5px 15px; color: teal; font-size:14px; background: transparent; border: 1px solid teal; cursor: pointer;}
+        .myHrf{ padding: 5px 15px; color: teal; font-size:14px; background: transparent; border: 1px solid teal; cursor: pointer;}
+        .mDiv{ width:750px;  border: 1px solid teal; padding:15px;
+            margin:0;
+            box-sizing:border-box;}
+    </style>
+    <div class="mDiv">
+    <h1>Регистрация</h1>
+
+    {{ form_start(registrationForm) }}
+        <p><label>Логин</label>{{ form_row(registrationForm.login) }}</p>
+    <p><label>Фамилия</label>{{ form_row(registrationForm.surname) }}</p>
+    <p><label>Имя</label>{{ form_row(registrationForm.name) }}</p>
+    <p><label>Отчество</label>{{ form_row(registrationForm.midName) }}</p>
+    <p><label>Ваша роль</label>{{ form_row(registrationForm.roles) }}</p>
+    <p><label>Пароль</label>{{ form_row(registrationForm.plainPassword) }}</p>
+
+
+
+        <button type="submit" class="myBtn">Регистрация</button>
+    <a class="myHrf" href="/login">Авторизация</a>
+    {{ form_end(registrationForm) }}
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MechanicController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    body{justify-content: center; display: flex; }
+    input{ width: 90%; padding: 5px 15px; margin: 5px 0; border: 1px solid teal;}
+    .myBtn{ padding: 5px 15px; color: teal; font-size:14px; background: transparent; border: 1px solid teal; cursor: pointer;}
+    .myHrf{ text-decoration: none; padding: 12px; margin-left:650px; margin-right:0px; color: #0095b6; width:50px; font-size:14px; background: transparent;
+        border: 1px solid #0095b6; justify-content: space-around;  border-radius: 5px; cursor: pointer;}
+    .mDiv{ width:750px;  border: 1px solid teal; padding:15px; margin:0; box-sizing:border-box;}
+    .mylist{ display: flex; padding:15px; border: 2px solid teal; margin-top:15px; justify-content: space-between; align-items:center;}
+</style>
+
+
+<div class="mDiv">
+    <a class= "myHrf" href="/logout">Выйти</a>
+    <h1>Зарегестрированые накладные</h1>
+
+
+       {%  for v in vehicle %}
+           <div class="mylist">
+                    <span><b>Модель: </b>{{ v.model }}</span>
+               <span><b>VIN: </b>{{ v.vin}}</span>
+               <span><b>Бренд: </b>{{ v.brand.name }}</span>
+               <a href="mechanic/{{ v.id }}/add" >Ремонт</a>
+           </div>
+       {% endfor %}
+
+</div>
+{% endblock %}

@@ -14,6 +14,34 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% block body %}
+            <h3>Данные клиента</h3>
+            <p>
+                ФИО: {{ basket.consignment.vehicle.client.name }}
+                {{ basket.consignment.vehicle.client.surname }}
+                {{ basket.consignment.vehicle.client.midName }}
+            </p>
+            <p>Номер телефона: {{  basket.consignment.vehicle.client.phone }}</p>
+            <br>
+            <h3>Ремонтируемая машина</h3>
+            <p>Модель: {{ basket.consignment.vehicle.model }}</p>
+            <p>Бренд: {{ basket.consignment.vehicle.brand.name }}</p>
+            <p>Год выпуска: {{ basket.consignment.vehicle.releaseDate }}</p>
+            <p>VIN: {{ basket.consignment.vehicle.vin }}</p>
+            <br>
+            <h3>Оказанные услуги</h3>
+            {% for s in services %}
+                <p> Услуга:  {{ s.job.name }}</p>
+                <p> Стоимость: {{ s.job.cost }}</p>
+            {% endfor %}
+            <h3>Новые детали</h3>
+            {% for d in details %}
+                <p>Деталь: {{ d.detail.name }}</p>
+                <p>Стоимость {{ d.detail.cost }}</p>
+            {% endfor %}
+            <br>
+
+        <h3>Общая сумма составила : <em>{{ basket.cost }}</em><h3>
+        {% endblock %}
     </body>
 </html>
